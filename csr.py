@@ -26,7 +26,7 @@ def generate_key(*args):
 
 
 def dir():
-    fd = filedialog.askdirectory(title="Where to save", initialdir=home)
+    fd = filedialog.askdirectory(title="Choose folder to save", initialdir=home)
     tkfd.set(fd)
 
 
