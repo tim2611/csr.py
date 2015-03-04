@@ -1,3 +1,7 @@
+#small python program to create an csr for a sll certificate
+
+#ToDo add a listfield to change the bits for the request 1024 2048 4096
+
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog

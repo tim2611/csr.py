@@ -7,4 +7,4 @@
 #                                                    
 #  
 tkinter gui with python for generating csr with openssl
-Just a gui to create a privatekey and csr with openssl
+Just a gui to create a private-key and csr with openssl
