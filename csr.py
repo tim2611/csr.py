@@ -14,6 +14,7 @@ def generate_csr(*args):
         fqdn = certname.get()
         path = tkfd.get()
         os.system("xterm -e 'openssl req -new -key " + path + fqdn + ".key -out " + path + "/" + fqdn + ".csr -sha512'")
+        btnGenerate.config(state='disabled')
     except ValueError:
         pass
 
@@ -21,7 +22,10 @@ def generate_csr(*args):
 def generate_key(*args):
     try:
         fqdn = certname.get()
-        path = tkfd.get() + "/"
+        path = tkfd.get()
+        if not path:
+            path = home
+        path = path + "/"
         bits = spbbits.get()
         tkfd.set(path)
         os.system("xterm -e openssl genrsa -out " + path + fqdn + ".key " +bits)
@@ -48,9 +52,9 @@ certname = StringVar()
 tkfd = StringVar()
 home = expanduser("~")
 
+#placing widgets on mainframe
 certname_entry = ttk.Entry(mainframe, width=7, textvariable=certname)
 certname_entry.grid(column=2, row=2, sticky=(W, E))
-
 ttk.Button(mainframe, text="Generate Key", command=generate_key).grid(column=1, row=3, sticky=W)
 ttk.Button(mainframe, text="Set Dir", command=dir).grid(column=1, row=1, sticky=W)
 btnGenerate = ttk.Button(mainframe, text="Generate CSR", state='disabled', command=generate_csr)
@@ -58,7 +62,6 @@ btnGenerate.grid(column=2, row=3, sticky=W)
 spbbits = Spinbox(mainframe, values=(4096, 2048, 1024))
 spbbits.grid(column=3, row=2, sticky=E)
 ttk.Button(mainframe, text="Cancel", command=exit).grid(column=3, row=3, sticky=W)
-
 ttk.Label(mainframe, text="FQDN Name:").grid(column=1, row=2, sticky=E)
 
 for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
